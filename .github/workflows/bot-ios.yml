@@ -1,0 +1,21 @@
+on:
+  push:
+    branches:
+    - "_bot-ios_"
+
+jobs:
+  pull-request:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Pull Request
+      uses: repo-sync/pull-request@v2
+      with:
+        source_branch: ""                                              # If blank, default: triggered branch
+        destination_branch: "staging-ios"                          # If blank, default: master
+        pr_title: "Pulling ${{ github.ref }} into staging-ios"     # Title of pull request
+        pr_body: "*All Hail to the Jr. DevOps* :crown:"                # Full markdown support, requires pr_title to be set
+        pr_label: "AUTO-PR"                                            # Comma-separated list (no spaces)
+        pr_draft: false                                                 # Creates pull request as draft
+        pr_allow_empty: true                                           # Creates pull request even if there are no changes
+        github_token: ${{ secrets.GITHUB_TOKEN }}

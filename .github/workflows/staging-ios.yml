@@ -1,0 +1,40 @@
+on:
+  push:
+    branches:
+    - "staging-ios"
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/staging' #dont run when there is a push from staging 
+    steps:
+    - uses: actions/checkout@v2
+    - name: Push code to Android [ _bot-reactnative_ ] branch
+      id: push_directory
+      uses: cpina/github-action-push-to-another-repository@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.PRIVATE_TOKEN_GITHUB }}
+      with:
+        source-directory: 'ReactNativeApp/ios/'
+        destination-github-username: 'sabih-jogo'
+        destination-repository-name: 'C-IOS'
+        user-email: sabih@jogo.ai
+        commit-message: See ORIGIN_COMMIT from $GITHUB_REF
+        target-branch: _bot-reactnative_
+        target-directory: 'ios/'
+    
+    - name: Test get variable exported by push-to-another-repository
+      run: echo $DESTINATION_CLONED_DIRECTORY
+    
+    - name: Create Pull request to RN [dev] branch
+      uses: repo-sync/pull-request@v2
+      with:
+        source_branch: ""                                              # If blank, default: triggered branch
+        destination_branch: "dev"                          # If blank, default: master
+        pr_title: "Pulling ${{ github.ref }} into dev"     # Title of pull request
+        pr_body: "*All Hail to the Jr. DevOps* :crown:"                # Full markdown support, requires pr_title to be set
+        pr_label: "AUTO-PR"                                            # Comma-separated list (no spaces)
+        pr_draft: false                                                 # Creates pull request as draft
+        pr_allow_empty: true                                           # Creates pull request even if there are no changes
+        github_token: ${{ secrets.GITHUB_TOKEN }}
