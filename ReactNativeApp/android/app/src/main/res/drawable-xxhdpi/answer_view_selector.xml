@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:drawable="@drawable/black_circle" app:view_type_idle="true" />
+    <item android:drawable="@drawable/black_with_jogo_circle" app:view_type_correctAnswer="true" />
+    <item android:drawable="@drawable/black_with_red_circle" app:view_type_wrongAnswer="true" />
+</selector>
+
+    <!-- xmlns:app="http://schemas.android.com/apk/res/com.jogo"-->

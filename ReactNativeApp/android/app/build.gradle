@@ -1,6 +1,6 @@
 apply plugin: "com.android.application"
-
 import com.android.build.OutputFile
+
 
 project.ext.envConfigFiles = [
     proddebug: ".env.prod",
@@ -27,17 +27,47 @@ def jscFlavor = 'org.webkit:android-jsc:+'
 
 def enableHermes = project.ext.react.get("enableHermes", false);
 
+project.ext.ASSET_DIR = projectDir.toString() + '/src/main/assets'
+project.ext.TMP_DIR = project.buildDir.toString() + '/downloads'
+
 android {
+    buildFeatures{
+        viewBinding true
+        dataBinding true
+    }
     lintOptions {
         checkReleaseBuilds false
+        abortOnError false
     }
     ndkVersion rootProject.ext.ndkVersion
 
     compileSdkVersion rootProject.ext.compileSdkVersion
+
+    testOptions {
+
+        unitTests.all {
+            useJUnitPlatform()
+            testLogging {
+                events "passed", "skipped", "failed", "standardOut", "standardError"
+            }
+        }
+
+        // Changes the directory where Gradle saves test reports. By default, Gradle saves test reports
+        // in the path_to_your_project/module_name/build/outputs/reports/ directory.
+        // '$rootDir' sets the path relative to the root directory of the current project.
+        reportDir "$rootDir/test-reports"
+        // Changes the directory where Gradle saves test results. By default, Gradle saves test results
+        // in the path_to_your_project/module_name/build/outputs/test-results/ directory.
+        // '$rootDir' sets the path relative to the root directory of the current project.
+        resultsDir "$rootDir/test-results"
+
+
+    }
+
     flavorDimensions "default"
     defaultConfig {
         multiDexEnabled true
-        applicationId "com.HomeOfFootball"
+        applicationId "com.football433"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -80,6 +110,17 @@ android {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
+    }
+
+    aaptOptions {
+        noCompress "tflite"
+    }
+
+    packagingOptions {
+        pickFirst "lib/armeabi-v7a/libc++_shared.so"
+        pickFirst "lib/arm64-v8a/libc++_shared.so"
+        pickFirst "lib/x86/libc++_shared.so"
+        pickFirst "lib/x86_64/libc++_shared.so"
     }
 
     productFlavors {
@@ -128,6 +169,10 @@ dependencies {
     
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
+    implementation "io.reactivex.rxjava3:rxjava:3.0.5"
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation("com.uber.rxdogtag2:rxdogtag:2.0.0")
+
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
     }
@@ -141,6 +186,42 @@ dependencies {
         exclude group:'com.facebook.flipper'
     }
 
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+
+    implementation 'com.google.mlkit:pose-detection:17.0.1-beta4'
+    implementation 'com.google.mlkit:pose-detection-accurate:17.0.1-beta4'
+
+    implementation 'com.google.guava:guava:28.1-android'
+
+    implementation 'io.sentry:sentry-android:5.0.1'
+
+    //RxJava
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    // Because RxAndroid releases are few and far between, it is recommended you also
+    // explicitly depend on RxJava's latest version for bug fixes and new features.
+    // (see https://github.com/ReactiveX/RxJava/releases for latest 3.x.x version)
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.5'
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.karumi:dexter:6.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'com.google.truth:truth:1.0.1'
+//    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.testng:testng:6.9.6'
+
+//    implementation "org.tensorflow:tensorflow-lite-task-vision:0.0.0-nightly"
+//    implementation 'org.tensorflow:tensorflow-lite:2.6.0'
+//    implementation 'org.tensorflow:tensorflow-lite-gpu:2.6.0'
+    // Import tflite dependencies
+    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT'
+    // The GPU delegate library is optional. Depend on it as needed.
+    implementation 'org.tensorflow:tensorflow-lite-gpu:0.0.0-nightly-SNAPSHOT'
+    implementation 'org.tensorflow:tensorflow-lite-support:0.0.0-nightly-SNAPSHOT'
+
+
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
         debugImplementation files(hermesPath + "hermes-debug.aar")
@@ -148,6 +229,31 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation "androidx.constraintlayout:constraintlayout:2.0.0"
+    implementation 'com.github.ratty3697:android-smart-animation-library:1.6'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    //METADATA Receiver
+    implementation 'com.github.wseemann:FFmpegMediaMetadataRetriever-core:1.0.15'
+    implementation 'com.github.wseemann:FFmpegMediaMetadataRetriever-native:1.0.15'
+
+    implementation group: 'com.opencsv', name: 'opencsv', version: '4.4'
+
+    implementation group: 'org.slf4j', name:'slf4j-api', version: '1.7.2' // for sonarqube
+    implementation group: 'ch.qos.logback', name:'logback-classic', version: '1.0.9'
+    implementation group: 'ch.qos.logback', name:'logback-core', version: '1.0.9'
+
+    // Multidex
+//    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+    implementation("com.squareup.okhttp3:okhttp-urlconnection:4.9.0")
+
+    implementation 'com.airbnb.android:lottie:4.1.0'
+    implementation 'com.otaliastudios:cameraview:2.7.2'
+
 }
 
 // Run this once to be able to run the application with BUCK
