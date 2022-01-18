@@ -1,0 +1,320 @@
+{
+  "metadata": {
+    "gameName" : "Juggling",
+    "objectsNeeded": [
+      {
+        "type": "person",
+        "variation": "normal"
+      },
+      {
+        "type": "ball",
+        "variation": "normal"
+      }
+    ],
+    "exerciseDuration": 90,
+    "calibration": {
+      "type": "person",
+      "animation": "squats"
+    }
+  },
+  "pipes": [
+    {
+      "from": "object:pLA1$op:pLA1_O1",
+      "to": "numeric:getX1$ip:getX1_I1"
+    },
+    {
+      "from": "numeric:getX1$op:getX1_O1",
+      "to": "numeric:getHigh1$ip:getHigh1_I1"
+    },
+    {
+      "from": "numeric:getHigh1$op:getHigh1_O1",
+      "to": "numeric:max1$ip:max1_I1"
+    },
+    {
+      "from": "object:pRA1$op:pRA1_O1",
+      "to": "numeric:getX2$ip:getX2_I1"
+    },
+    {
+      "from": "numeric:getX2$op:getX2_O1",
+      "to": "numeric:getHigh2$ip:getHigh2_I1"
+    },
+    {
+      "from": "numeric:getHigh2$op:getHigh2_O1",
+      "to": "numeric:max1$ip:max1_I2"
+    },
+    {
+      "from": "numeric:max1$op:max1_O1",
+      "to": "logic:gt1$ip:gt1_I1"
+    },
+    {
+      "from": "object:ballLoc1$op:ballLoc1_O1",
+      "to": "logic:gt1$ip:gt1_I2"
+    },
+    {
+      "from": "object:ballLoc1$op:ballLoc1_O1",
+      "to": "logic:gt2$ip:gt2_I1"
+    },
+    {
+      "from": "object:pLK1$op:pLK1_O1",
+      "to": "numeric:getX3$ip:getX3_I1"
+    },
+    {
+      "from": "numeric:getX3$op:getX3_O1",
+      "to": "numeric:getHigh3$ip:getHigh3_I1"
+    },
+    {
+      "from": "numeric:getHigh3$op:getHigh3_O1",
+      "to": "numeric:max2$ip:max2_I1"
+    },
+    {
+      "from": "object:pRK1$op:pRK1_O1",
+      "to": "numeric:getX4$ip:getX4_I1"
+    },
+    {
+      "from": "numeric:getX4$op:getX4_O1",
+      "to": "numeric:getHigh4$ip:getHigh4_I1"
+    },
+    {
+      "from": "numeric:getHigh4$op:getHigh4_O1",
+      "to": "numeric:max2$ip:max2_I2"
+    },
+    {
+      "from": "numeric:max2$op:max2_O1",
+      "to": "logic:gt2$ip:gt2_I2"
+    },
+    {
+      "from": "logic:gt1$op:gt1_O1",
+      "to": "logic:and1$ip:and1_I1"
+    },
+    {
+      "from": "logic:gt1$op:gt1_O2",
+      "to": "number:number2$ip:number2_I1"
+    },
+    {
+      "from": "logic:gt2$op:gt2_O1",
+      "to": "logic:and1$ip:and1_I2"
+    },
+    {
+      "from": "object:bounceY1$op:bounceY1_O1",
+      "to": "logic:and1$ip:and1_I3"
+    },
+    {
+      "from": "logic:and1$op:and1_O1",
+      "to": "number:number1$ip:number1_I1"
+    },
+    {
+      "from": "logic:and1$op:and1_O2",
+      "to": "action:set1$ip:set1_I1"
+    },
+    {
+      "from": "number:number1$op:number1_O1",
+      "to": "logic:or1$ip:or1_I1"
+    },
+    {
+      "from": "number:number2$op:number2_O1",
+      "to": "logic:or1$ip:or1_I2"
+    },
+    {
+      "from": "action:getLevel1$op:getLevel1_O1",
+      "to": "number:number1$ip:number1_I2"
+    },
+    {
+      "from": "action:getLevel1$op:getLevel1_O1",
+      "to": "numeric:multiply1$ip:multiply1_I1"
+    },
+    {
+      "from": "numeric:multiply1$op:multiply1_O1",
+      "to": "number:number2$ip:number2_I2"
+    },
+    {
+      "from": "logic:or1$ip:or1_O1",
+      "to": "action:act1$ip:act1_I1"
+    }
+  ],
+  
+  "flowables": [
+    {
+      "name": "leftAnkle",
+      "type": "object",
+      "subtype": "ankle",
+      "uid": "pLA1",
+      "id": "pLA1"
+    },
+    {
+      "name": "GetHighest",
+      "type": "numeric",
+      "subtype": "getHighest",
+      "uid": "getHigh1",
+      "id": "getHigh1"
+    },
+    {
+      "name": "GetX",
+      "type": "numeric",
+      "subtype": "y",
+      "uid": "getX1",
+      "id": "getX1"
+    },
+    {
+      "name": "rightAnkle",
+      "type": "object",
+      "subtype": "ankle",
+      "uid": "pRA1",
+      "id": "pRA1"
+    },
+    {
+      "name": "GetHighest",
+      "type": "numeric",
+      "subtype": "getHighest",
+      "uid": "getHigh2",
+      "id": "getHigh1"
+    },
+    {
+      "name": "GetX",
+      "type": "numeric",
+      "subtype": "y",
+      "uid": "getX2",
+      "id": "getX1"
+    },
+    {
+      "name": "max",
+      "type": "numeric",
+      "subtype": "max",
+      "uid": "max1",
+      "id": "max1"
+    },
+    {
+      "name": "greaterThan",
+      "type": "logic",
+      "subtype": "greaterThan",
+      "uid": "gt1",
+      "id": "gt1"
+    },
+    {
+      "name": "ballLocationBottom",
+      "type": "object",
+      "subtype": "bottom",
+      "uid": "ballLoc1",
+      "id": "ballLoc1"
+    },
+    {
+      "name": "and",
+      "type": "logic",
+      "subtype": "and",
+      "uid": "and1",
+      "id": "and1"
+    },
+    {
+      "name": "or",
+      "type": "logic",
+      "subtype": "or",
+      "uid": "or1",
+      "id": "or1"
+    },
+    {
+      "name": "greaterThan",
+      "type": "logic",
+      "subtype": "greaterThan",
+      "uid": "gt2",
+      "id": "gt1"
+    },
+    {
+      "name": "leftKnee",
+      "type": "object",
+      "subtype": "knee",
+      "uid": "pLK1",
+      "id": "pLK1"
+    },
+    {
+      "name": "GetX",
+      "type": "numeric",
+      "subtype": "y",
+      "uid": "getX3",
+      "id": "getX1"
+    },
+    {
+      "name": "GetHighest",
+      "type": "numeric",
+      "subtype": "getHighest",
+      "uid": "getHigh3",
+      "id": "getHigh1"
+    },
+    {
+      "name": "rightKnee",
+      "type": "object",
+      "subtype": "knee",
+      "uid": "pRK1",
+      "id": "pRK1"
+    },
+    {
+      "name": "GetX",
+      "type": "numeric",
+      "subtype": "y",
+      "uid": "getX4",
+      "id": "getX1"
+    },
+    {
+      "name": "GetHighest",
+      "type": "numeric",
+      "subtype": "getHighest",
+      "uid": "getHigh4",
+      "id": "getHigh1"
+    },
+    {
+      "name": "max",
+      "type": "numeric",
+      "subtype": "max",
+      "uid": "max2",
+      "id": "max1"
+    },
+    {
+      "name": "didBounceY",
+      "type": "object",
+      "subtype": "didBounce",
+      "uid": "bounceY1",
+      "id": "bounceY1"
+    },
+    {
+      "name": "Number",
+      "type": "numeric",
+      "subtype": "property",
+      "uid": "number1",
+      "id": "number1"
+    },
+    {
+      "name": "Number",
+      "type": "numeric",
+      "subtype": "property",
+      "uid": "number2",
+      "id": "number1"
+    },
+    {
+      "name": "Action",
+      "type": "action",
+      "subtype": "score",
+      "uid": "act1",
+      "id": "act1"
+    },
+    {
+      "name": "Setter",
+      "type": "action",
+      "subtype": "setGlobal",
+      "uid": "set1",
+      "id": "set1"
+    },
+    {
+      "name": "GetLevelNumber",
+      "type": "action",
+      "subtype": "getLevel",
+      "uid": "getLevel1",
+      "id": "getLevel1"
+    },
+    {
+      "name": "Multiply",
+      "type": "numeric",
+      "subtype": "multiply",
+      "uid": "multiply1",
+      "id": "multiply1"
+    }
+  ]
+}
+

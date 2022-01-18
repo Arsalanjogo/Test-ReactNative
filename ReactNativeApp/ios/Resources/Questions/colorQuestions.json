@@ -1,0 +1,60 @@
+{
+  "questions": [
+    {
+      "question": "#f50202",
+      "answer": "#f50202",
+      "A": "#0015fa",
+      "B": "#00bf0d",
+      "C": "#f3ff0a"
+    },
+    {
+      "question": "#0015fa",
+      "answer": "#0015fa",
+      "A": "#00bf0d",
+      "B": "#f50202",
+      "C": "#000000"
+    },
+    {
+      "question": "#00bf0d",
+      "answer": "#00bf0d",
+      "A": "#d104d1",
+      "B": "#03ffff",
+      "C": "#878787"
+    },
+    {
+      "question": "#f3ff0a",
+      "answer": "#f3ff0a",
+      "A": "#878787",
+      "B": "#00bf0d",
+      "C": "#03ffff"
+    },
+    {
+      "question": "#000000",
+      "answer": "#000000",
+      "A": "#03ffff",
+      "B": "#f3ff0a",
+      "C": "#00bf0d"
+    },
+    {
+      "question": "#d104d1",
+      "answer": "#d104d1",
+      "A": "#0015fa",
+      "B": "#f50202",
+      "C": "#878787"
+    },
+    {
+      "question": "#03ffff",
+      "answer": "#03ffff",
+      "A": "#000000",
+      "B": "#f3ff0a",
+      "C": "#d104d1"
+    },
+    {
+      "question": "#878787",
+      "answer": "#878787",
+      "A": "#00bf0d",
+      "B": "#03ffff",
+      "C": "#f50202"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProgressionBar" customModule="Jogo" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="IeW-b5-xsY"/>
+                <outlet property="mainView" destination="bQQ-Kj-ZDi" id="2Ue-hH-Bwq"/>
+                <outlet property="progressBar" destination="0t7-7V-1KG" id="Eor-h9-5pm"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="650" height="86"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bQQ-Kj-ZDi">
+                    <rect key="frame" x="8" y="8" width="634" height="70"/>
+                    <subviews>
+                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="0t7-7V-1KG">
+                            <rect key="frame" x="16" y="14" width="602" height="43"/>
+                            <color key="trackTintColor" white="0.0" alpha="0.8004237583705357" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </progressView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="0t7-7V-1KG" secondAttribute="trailing" constant="16" id="2un-AW-2y0"/>
+                        <constraint firstItem="0t7-7V-1KG" firstAttribute="leading" secondItem="bQQ-Kj-ZDi" secondAttribute="leading" constant="16" id="AUf-cb-Yn1"/>
+                        <constraint firstItem="0t7-7V-1KG" firstAttribute="height" secondItem="bQQ-Kj-ZDi" secondAttribute="height" multiplier="0.6" id="eNy-vz-1h1"/>
+                        <constraint firstItem="0t7-7V-1KG" firstAttribute="centerY" secondItem="bQQ-Kj-ZDi" secondAttribute="centerY" id="fc7-QJ-YBF"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="bQQ-Kj-ZDi" secondAttribute="bottom" constant="8" id="6lq-l7-63e"/>
+                <constraint firstItem="bQQ-Kj-ZDi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="HGF-nH-YmZ"/>
+                <constraint firstItem="bQQ-Kj-ZDi" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="YYI-kS-v3H"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="bQQ-Kj-ZDi" secondAttribute="trailing" constant="8" id="nEg-Bx-F2S"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-43.478260869565219" y="-197.54464285714286"/>
+        </view>
+    </objects>
+</document>

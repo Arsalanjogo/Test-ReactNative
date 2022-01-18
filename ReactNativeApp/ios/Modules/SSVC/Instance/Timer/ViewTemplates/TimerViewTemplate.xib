@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TimerViewTemplate" customModule="Jogo" customModuleProvider="target">
+            <connections>
+                <outlet property="timerContainer" destination="ayY-Nl-6m2" id="8zb-FE-7yf"/>
+                <outlet property="timerLabel" destination="O1Y-AY-Y67" id="HN4-Cg-XWN"/>
+                <outlet property="timerTitleLabel" destination="FT5-dz-umC" id="W5u-9m-Kgt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="140" height="55"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ayY-Nl-6m2">
+                    <rect key="frame" x="0.0" y="0.0" width="140" height="55"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1Y-AY-Y67">
+                            <rect key="frame" x="29" y="21" width="82.5" height="33.5"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                            </variation>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="TIME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FT5-dz-umC">
+                            <rect key="frame" x="56.5" y="5" width="27.5" height="13.5"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="11"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="FT5-dz-umC" firstAttribute="centerX" secondItem="ayY-Nl-6m2" secondAttribute="centerX" id="Gq0-6t-Rlh"/>
+                        <constraint firstItem="O1Y-AY-Y67" firstAttribute="centerX" secondItem="ayY-Nl-6m2" secondAttribute="centerX" id="Iqv-zf-rcA"/>
+                        <constraint firstAttribute="bottom" secondItem="O1Y-AY-Y67" secondAttribute="bottom" constant="0.5" id="Jjo-MS-2be"/>
+                        <constraint firstItem="FT5-dz-umC" firstAttribute="top" secondItem="ayY-Nl-6m2" secondAttribute="top" constant="5" id="NsZ-zR-GyI"/>
+                        <constraint firstItem="O1Y-AY-Y67" firstAttribute="top" secondItem="FT5-dz-umC" secondAttribute="bottom" constant="2.5" id="mbT-RW-AbF"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="ayY-Nl-6m2" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="GOM-IU-eya"/>
+                <constraint firstItem="ayY-Nl-6m2" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="LVb-ig-h5f"/>
+                <constraint firstItem="ayY-Nl-6m2" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="PsP-0O-ham"/>
+                <constraint firstItem="ayY-Nl-6m2" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Tv2-hJ-tos"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="121.73913043478262" y="-259.48660714285711"/>
+        </view>
+    </objects>
+</document>

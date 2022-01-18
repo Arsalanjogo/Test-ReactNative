@@ -1,0 +1,74 @@
+require_relative '../node_modules/react-native/scripts/react_native_pods'
+require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+
+platform :ios, '11.0'
+
+
+project 'Football433',
+        'DevDebug' => :debug,
+        'DevRelease' => :release, 
+        'StagingDebug' => :debug,
+        'StagingRelease' => :release,
+        'AIDebug' => :debug,
+        'AIRelease' => :release
+
+target 'Football433' do
+  config = use_native_modules!
+
+  use_react_native!(
+    :path => config[:reactNativePath],
+    # to enable hermes on iOS, change `false` to `true` and then install pods
+    :hermes_enabled => false
+  )
+
+
+   # permissions
+   permissions_path = '../node_modules/react-native-permissions/ios'
+
+   pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
+   pod 'Permission-MediaLibrary', :path => "#{permissions_path}/MediaLibrary"
+   pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary"
+   pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse"
+
+
+  # Enables Flipper.
+  #
+  # Note that if you have use_frameworks! enabled, Flipper will not work and
+  # you should disable the next line.
+
+#  use_flipper!()
+
+  pod 'GoogleMLKit/PoseDetectionAccurate'
+  pod 'GoogleMLKit/PoseDetection'
+  pod 'TensorFlowLiteSwift', '2.6.0'
+  pod 'TensorFlowLiteSwift/Metal', '2.6.0'
+  pod 'TensorFlowLiteSwift/CoreML', '2.6.0'  # Or TensorFlowLiteObjC/CoreML
+  pod 'TensorFlowLiteSelectTfOps', '0.0.1-nightly.20210202'
+  pod 'RxSwift', '6.1.0'
+  pod 'RxCocoa', '6.1.0'
+  pod 'SwiftLog'
+  pod 'lottie-ios'
+  pod 'SwiftLint'
+  pod 'Charts'
+  
+  target 'Football433Tests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+ 
+  # post_install do |installer|
+  #   react_native_post_install(installer)
+  # end
+
+  post_install do |installer|
+    installer.pods_project.build_configurations.each do |config|
+      config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+    end
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'No'
+      end
+    end
+  end
+
+end

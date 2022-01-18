@@ -1,0 +1,7 @@
+import {StyleSheet, I18nManager} from 'react-native';
+
+export default StyleSheet.create({
+  imageStyle: {
+    transform: [{scaleX: I18nManager.isRTL ? -1 : 1}],
+  },
+});

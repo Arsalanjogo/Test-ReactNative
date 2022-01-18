@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "gameName" : "GraphGame",
+    "objectsNeeded": [
+      {
+        "type": "person",
+        "variation": "normal"
+      },
+      {
+        "type": "ball",
+        "variation": "normal"
+      }
+    ],
+    "exerciseDuration": 90,
+    "calibration": {
+      "type": "person",
+      "animation": "squats"
+    }
+  },
+  "pipes": [
+    {
+      "from": "action:aTim1$op:aTim1_O1",
+      "to": "numeric:nIncr1$ip:nIncr1_I1"
+    },
+    {
+      "from": "action:aTim1$op:aTim1_O1",
+      "to": "numeric:nNum1$ip:nNum1_I3"
+    },
+    {
+      "from": "numeric:nIncr1$op:nIncr1_O1",
+      "to": "logic:lGt1$ip:lGt1_I1"
+    },
+    {
+      "from": "numeric:nNum1$op:nNum1_O1",
+      "to": "logic:lGt1$ip:lGt1_I2"
+    },
+    {
+      "from": "logic:lGt1$op:lGt1_O1",
+      "to": "numeric:nIncr1$ip:nIncr1_I2"
+    },
+    {
+      "from": "logic:lGt1$op:lGt1_O1",
+      "to": "numeric:nNum2$ip:nNum2_I3"
+    },
+    {
+      "from": "numeric:nNum2$op:nNum2_O1",
+      "to": "action:aSc1$ip:aSc1_I1"
+    },
+  ],
+  
+  "flowables": [
+    {
+      "name": "timer",
+      "type": "action",
+      "subtype": "timer",
+      "uid": "aTim1",
+      "id": "aTim1"
+    },
+    {
+      "name": "numberIncrement",
+      "type": "numeric",
+      "subtype": "increment",
+      "uid": "nIncr1",
+      "id": "nIncr1"
+    },
+    {
+      "name": "everyN",
+      "type": "numeric",
+      "subtype": "numberCalculator",
+      "uid": "nNum1",
+      "id": "nNum1",
+      "options": {
+        "initialValue": 4
+      }
+    },
+    {
+      "name": "greaterThan1",
+      "type": "logic",
+      "subtype": "greaterThan",
+      "uid": "lGt1",
+      "id": "lGt1"
+    },
+    {
+      "name": "incrementBy",
+      "type": "numeric",
+      "subtype": "numberCalculator",
+      "uid": "nNum2",
+      "id": "nNum2",
+      "options": {
+        "initialValue": 1
+      }
+    },
+    {
+      "name": "scoreCounter",
+      "type": "action",
+      "subtype": "score",
+      "uid": "aSc1",
+      "id": "aSc1"
+    },
+    
+  ]
+}
+
