@@ -1,0 +1,266 @@
+apply plugin: "com.android.application"
+import com.android.build.OutputFile
+
+
+project.ext.envConfigFiles = [
+    proddebug: ".env.prod",
+    prodrelease: ".env.prod",
+    devdebug: ".env.dev",
+    devrelease: ".env.dev",
+    stagingdebug: '.env.staging',
+    stagingrelease: '.env.staging',
+]
+
+project.ext.react = [
+    enableHermes: false,  // clean and rebuild if changing
+]
+
+apply from: "../../node_modules/react-native/react.gradle"
+apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
+def enableSeparateBuildPerCPUArchitecture = false
+
+def enableProguardInReleaseBuilds = false
+
+def jscFlavor = 'org.webkit:android-jsc:+'
+
+def enableHermes = project.ext.react.get("enableHermes", false);
+
+project.ext.ASSET_DIR = projectDir.toString() + '/src/main/assets'
+project.ext.TMP_DIR = project.buildDir.toString() + '/downloads'
+
+android {
+    buildFeatures{
+        viewBinding true
+        dataBinding true
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    ndkVersion rootProject.ext.ndkVersion
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    testOptions {
+
+        unitTests.all {
+            useJUnitPlatform()
+            testLogging {
+                events "passed", "skipped", "failed", "standardOut", "standardError"
+            }
+        }
+
+        // Changes the directory where Gradle saves test reports. By default, Gradle saves test reports
+        // in the path_to_your_project/module_name/build/outputs/reports/ directory.
+        // '$rootDir' sets the path relative to the root directory of the current project.
+        reportDir "$rootDir/test-reports"
+        // Changes the directory where Gradle saves test results. By default, Gradle saves test results
+        // in the path_to_your_project/module_name/build/outputs/test-results/ directory.
+        // '$rootDir' sets the path relative to the root directory of the current project.
+        resultsDir "$rootDir/test-results"
+
+
+    }
+
+    flavorDimensions "default"
+    defaultConfig {
+        multiDexEnabled true
+        applicationId "com.football433"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "0.0.1"
+        resValue "string", "build_config_package", "com.football433"
+    }
+    lintOptions { 
+       checkReleaseBuilds false 
+    }
+    splits {
+        abi {
+            reset()
+            enable enableSeparateBuildPerCPUArchitecture
+            universalApk false  // If true, also generate a universal APK
+            include "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
+        }
+    }
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword '433debug'
+            keyAlias '433debug'
+            keyPassword '433debug'
+        }
+        release {
+            if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
+                storeFile file(MYAPP_UPLOAD_STORE_FILE)
+                storePassword MYAPP_UPLOAD_STORE_PASSWORD
+                keyAlias MYAPP_UPLOAD_KEY_ALIAS
+                keyPassword MYAPP_UPLOAD_KEY_PASSWORD
+            }
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+    }
+
+    aaptOptions {
+        noCompress "tflite"
+    }
+
+    packagingOptions {
+        pickFirst "lib/armeabi-v7a/libc++_shared.so"
+        pickFirst "lib/arm64-v8a/libc++_shared.so"
+        pickFirst "lib/x86/libc++_shared.so"
+        pickFirst "lib/x86_64/libc++_shared.so"
+    }
+
+    productFlavors {
+        dev {
+            dimension 'default'
+            applicationIdSuffix ".dev"
+        }
+        staging {
+            dimension 'default'
+            applicationIdSuffix ".staging"
+        }
+        ai {
+            dimension 'default'
+            applicationIdSuffix ".ai"
+        }
+        prod {
+            dimension 'default'
+            applicationIdSuffix ""
+        }
+    }
+
+    // applicationVariants are e.g. debug, release
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            // For each separate APK per architecture, set a unique version code as described here:
+            // https://developer.android.com/studio/build/configure-apk-splits.html
+            // Example: versionCode 1 will generate 1001 for armeabi-v7a, 1002 for x86, etc.
+            def versionCodes = ["armeabi-v7a": 1, "x86": 2, "arm64-v8a": 3, "x86_64": 4]
+            def abi = output.getFilter(OutputFile.ABI)
+            if (abi != null) {  // null for the universal-debug, universal-release variants
+                output.versionCodeOverride =
+                        defaultConfig.versionCode * 1000 + versionCodes.get(abi)
+            }
+
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    //noinspection GradleDynamicVersion
+     implementation 'com.android.support:multidex:2.0.1'
+    implementation "com.facebook.react:react-native:+"  // From node_modules
+
+    implementation "androidx.core:core-splashscreen:1.0.0-alpha02"
+    
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+
+    implementation "io.reactivex.rxjava3:rxjava:3.0.5"
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation("com.uber.rxdogtag2:rxdogtag:2.0.0")
+
+    debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
+      exclude group:'com.facebook.fbjni'
+    }
+
+    debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
+        exclude group:'com.facebook.flipper'
+        exclude group:'com.squareup.okhttp3', module:'okhttp'
+    }
+
+    debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}") {
+        exclude group:'com.facebook.flipper'
+    }
+
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+
+    implementation 'com.google.mlkit:pose-detection:17.0.1-beta4'
+    implementation 'com.google.mlkit:pose-detection-accurate:17.0.1-beta4'
+
+    implementation 'com.google.guava:guava:28.1-android'
+
+    implementation 'io.sentry:sentry-android:5.0.1'
+
+    //RxJava
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    // Because RxAndroid releases are few and far between, it is recommended you also
+    // explicitly depend on RxJava's latest version for bug fixes and new features.
+    // (see https://github.com/ReactiveX/RxJava/releases for latest 3.x.x version)
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.5'
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.karumi:dexter:6.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'com.google.truth:truth:1.0.1'
+//    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.testng:testng:6.9.6'
+
+//    implementation "org.tensorflow:tensorflow-lite-task-vision:0.0.0-nightly"
+//    implementation 'org.tensorflow:tensorflow-lite:2.6.0'
+//    implementation 'org.tensorflow:tensorflow-lite-gpu:2.6.0'
+    // Import tflite dependencies
+    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT'
+    // The GPU delegate library is optional. Depend on it as needed.
+    implementation 'org.tensorflow:tensorflow-lite-gpu:0.0.0-nightly-SNAPSHOT'
+    implementation 'org.tensorflow:tensorflow-lite-support:0.0.0-nightly-SNAPSHOT'
+
+
+    if (enableHermes) {
+        def hermesPath = "../../node_modules/hermes-engine/android/";
+        debugImplementation files(hermesPath + "hermes-debug.aar")
+        releaseImplementation files(hermesPath + "hermes-release.aar")
+    } else {
+        implementation jscFlavor
+    }
+
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation "androidx.constraintlayout:constraintlayout:2.0.0"
+    implementation 'com.github.ratty3697:android-smart-animation-library:1.6'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    //METADATA Receiver
+    implementation 'com.github.wseemann:FFmpegMediaMetadataRetriever-core:1.0.15'
+    implementation 'com.github.wseemann:FFmpegMediaMetadataRetriever-native:1.0.15'
+
+    implementation group: 'com.opencsv', name: 'opencsv', version: '4.4'
+
+    implementation group: 'org.slf4j', name:'slf4j-api', version: '1.7.2' // for sonarqube
+    implementation group: 'ch.qos.logback', name:'logback-classic', version: '1.0.9'
+    implementation group: 'ch.qos.logback', name:'logback-core', version: '1.0.9'
+
+    // Multidex
+//    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+    implementation("com.squareup.okhttp3:okhttp-urlconnection:4.9.0")
+
+    implementation 'com.airbnb.android:lottie:4.1.0'
+    implementation 'com.otaliastudios:cameraview:2.7.2'
+
+}
+
+// Run this once to be able to run the application with BUCK
+// puts all compile dependencies into folder libs for BUCK to use
+task copyDownloadableDepsToLibs(type: Copy) {
+    from configurations.compile
+    into 'libs'
+}
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle";
+apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
