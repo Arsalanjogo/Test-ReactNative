@@ -1,0 +1,114 @@
+
+{
+  "metadata": {
+    "gameName" : "JugglingGraph",
+    "objectsNeeded": [
+      {
+        "type": "person",
+        "variation": "normal"
+      },
+      {
+        "type": "ball",
+        "variation": "normal"
+      }
+    ],
+    "exerciseDuration": 90,
+    "calibration": {
+      "type": "person",
+      "animation": "juggling"
+    }
+  },
+  "pipes": [
+    {
+      "from": "object:ball1$op:ball1_O1",
+      "to": "object:bounce1$ip:bounce1_I1"
+    },
+    {
+      "from": "object:ball1$op:ball1_O1",
+      "to": "object:intersect1$ip:intersect1_I1"
+    },
+    {
+      "from": "object:groundLine1$op:groundLine1_O1",
+      "to": "object:intersect1$ip:intersect1_I2"
+    },
+    {
+      "from": "object:bounce1$op:bounce1_O1",
+      "to": "numeric:numberCalculator2$ip:numberCalculator2_I3"
+    },
+    {
+      "from": "object:intersect1$ip:intersect1_O1",
+      "to": "numeric:numberCalculator1$ip:numberCalculator1_I3"
+    },
+    {
+      "from": "numeric:numberCalculator1$ip:numberCalculator1_O1",
+      "to": "action:act1$ip:act1_I2"
+    },
+    {
+      "from": "numeric:numberCalculator2$ip:numberCalculator2_O1",
+      "to": "action:act1$ip:act1_I1"
+    }
+  ],
+
+  "flowables": [
+    {
+      "name": "Does the Ball",
+      "type": "object",
+      "subtype": "ball",
+      "uid": "ball1",
+      "id": "ball"
+    },
+    {
+      "name": "Does the Ground line",
+      "type": "object",
+      "subtype": "groundLine",
+      "uid": "groundLine1",
+      "id": "groundLine"
+    },
+    {
+      "name": "Bounce Vertically?",
+      "type": "object",
+      "subtype": "bounce",
+      "uid": "bounce1",
+      "id": "bounce",
+      "options": {
+        "direction": "up",
+        "lookback": 15,
+        "threshold": 0.01
+      }
+    },
+    {
+      "name": "Makes Contact",
+      "type": "object",
+      "subtype": "intersect",
+      "uid": "intersect1",
+      "id": "intersect"
+    },
+    {
+      "name": "Decrease count by",
+      "type": "numeric",
+      "subtype": "numberCalculator",
+      "uid": "numberCalculator1",
+      "id": "numberCalculator",
+      "options": {
+        "initialValue": 2
+      }
+    },
+    {
+      "name": "Increase count by",
+      "type": "numeric",
+      "subtype": "numberCalculator",
+      "uid": "numberCalculator2",
+      "id": "numberCalculator",
+      "options": {
+        "initialValue": 5
+      }
+    },
+    {
+      "name": "Game Score",
+      "type": "action",
+      "subtype": "score",
+      "uid": "act1",
+      "id": "act"
+    }
+  ]
+}

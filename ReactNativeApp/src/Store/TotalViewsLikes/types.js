@@ -1,0 +1,5 @@
+export const GET_LIKES_LISTING = 'GET_LIKES_LISTING';
+export const LIKES_LOADING = 'LIKES_LOADING';
+export const GET_VIEWS_LISTING = 'GET_VIEWS_LISTING';
+// export const SEARCH_USER = 'SEARCH_USER';
+export const LOAD_MORE = 'LOAD_MORE';

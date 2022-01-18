@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "question": "Cristiano Ronaldo",
+      "answer": "ronaldo.png",
+      "A": "messi.png",
+      "B": "neymar.png",
+      "C": "salah.png"
+    },
+    {
+      "question": "Lionel Messi",
+      "answer": "messi.png",
+      "A": "ronaldo.png",
+      "B": "sergio.png",
+      "C": "salah.png"
+    },
+    {
+      "question": "Neymar",
+      "answer": "neymar.png",
+      "A": "salah.png",
+      "B": "messi.png",
+      "C": "sergio.png"
+    },
+    {
+      "question": "Mohammad Salah",
+      "answer": "salah.png",
+      "A": "neymar.png",
+      "B": "ronaldo.png",
+      "C": "messi.png"
+    },
+    {
+      "question": "Sergio Ramos",
+      "answer": "sergio.png",
+      "A": "salah.png",
+      "B": "messi.png",
+      "C": "ronaldo.png"
+    }
+  ]
+}

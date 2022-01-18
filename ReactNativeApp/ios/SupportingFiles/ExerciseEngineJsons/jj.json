@@ -1,0 +1,170 @@
+{
+  "state":[
+    {
+      "on-start":[
+        {
+          "type":"lottie",
+          "asset":"jump.json"
+        }
+      ],
+      "on-process":[],
+      "on-end":[
+        {
+          "type":"increment-score",
+          "amount":1,
+          "blink": true,
+          "bleep": true
+        }
+      ],
+      "resolution":[
+        {
+          "type":"angle",
+          "i1":{
+            "type":"person",
+            "key": "LEFT_ELBOW"
+          },
+          "i2":{
+            "type":"person",
+            "key": "LEFT_SHOULDER"
+          },
+          "i3":{
+            "type":"person",
+            "key": "LEFT_HIP"
+          },
+          "min-angle":115,
+          "max-angle":-1
+        },
+        {
+          "type":"angle",
+          "i1":{
+            "type":"person",
+            "key": "RIGHT_ELBOW"
+          },
+          "i2":{
+            "type":"person",
+            "key": "RIGHT_SHOULDER"
+          },
+          "i3":{
+            "type":"person",
+            "key": "RIGHT_HIP"
+          },
+          "min-angle":115,
+          "max-angle":-1
+        },
+        {
+          "type":"angle",
+          "i1":{
+            "type":"person",
+            "key": "LEFT_SHOULDER"
+          },
+          "i2":{
+            "type":"person",
+            "key": "LEFT_HIP"
+          },
+          "i3":{
+            "type":"person",
+            "key": "LEFT_ANKLE"
+          },
+          "min-angle":10,
+          "max-angle":-1
+        },
+        {
+          "type":"angle",
+          "i1":{
+            "type":"person",
+            "key": "RIGHT_SHOULDER"
+          },
+          "i2":{
+            "type":"person",
+            "key": "RIGHT_HIP"
+          },
+          "i3":{
+            "type":"person",
+            "key": "RIGHT_ANKLE"
+          },
+          "min-angle":10,
+          "max-angle":-1
+        }
+      ],
+      "next-state-key":"down",
+      "key":"up"
+    },
+    {
+      "on-start":[],
+      "on-process":[],
+      "on-end":[],
+      "resolution":[
+        {
+          "type":"angle",
+          "i1":{
+            "type":"person",
+            "key": "LEFT_ELBOW"
+          },
+          "i2":{
+            "type":"person",
+            "key": "LEFT_SHOULDER"
+          },
+          "i3":{
+            "type":"person",
+            "key": "LEFT_HIP"
+          },
+          "min-angle":-1,
+          "max-angle":50
+        },
+        {
+          "type":"angle",
+          "i1":{
+            "type":"person",
+            "key": "RIGHT_ELBOW"
+          },
+          "i2":{
+            "type":"person",
+            "key": "RIGHT_SHOULDER"
+          },
+          "i3":{
+            "type":"person",
+            "key": "RIGHT_HIP"
+          },
+          "min-angle":-1,
+          "max-angle":50
+        },
+        {
+          "type":"angle",
+          "i1":{
+            "type":"person",
+            "key": "LEFT_SHOULDER"
+          },
+          "i2":{
+            "type":"person",
+            "key": "LEFT_HIP"
+          },
+          "i3":{
+            "type":"person",
+            "key": "LEFT_ANKLE"
+          },
+          "min-angle":172,
+          "max-angle":-1
+        },
+        {
+          "type":"angle",
+          "i1":{
+            "type":"person",
+            "key": "RIGHT_SHOULDER"
+          },
+          "i2":{
+            "type":"person",
+            "key": "RIGHT_HIP"
+          },
+          "i3":{
+            "type":"person",
+            "key": "RIGHT_ANKLE"
+          },
+          "min-angle":172,
+          "max-angle":-1
+        }
+      ],
+      "next-state-key":"up",
+      "key":"down"
+    }
+  ]
+}

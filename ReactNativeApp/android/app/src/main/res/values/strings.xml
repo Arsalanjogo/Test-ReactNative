@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Home of Football</string>
+    <string name="facebook_app_id">866629500684041</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">ob5zhxpEuODF_gN4eJkCmS7ccX4B-HKMIP9X2</string>
+</resources>
