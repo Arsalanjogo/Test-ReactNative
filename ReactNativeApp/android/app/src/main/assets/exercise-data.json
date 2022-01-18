@@ -1,0 +1,11 @@
+{
+        id:2,
+        title:'Perform Juggling',
+        description: "Are you a juggling master? You have 90 seconds to keep the ball up by using your feet, make sure the ball doesn't touch the ground! The longer you juggle, the more points you win.",        
+        exerciseTime:30000,
+        payLoad: "exercise",
+        camera: true,
+        cameraFacing: 0,
+        orientation: "PORTRAIT"
+    
+}

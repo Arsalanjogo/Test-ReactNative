@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="GIFView">
+        <attr name="src" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="QuestionAnswerCounter">
+        <attr name="view_type_idle" format="boolean" />
+        <attr name="view_type_correctAnswer" format="boolean" />
+        <attr name="view_type_wrongAnswer" format="boolean" />
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,20 @@
+{
+    "metadata": {
+      "gameName" : "Juggling",
+      "objectsNeeded": [
+        {
+        "type": "person",
+        "variation": "fast"
+      },
+      {
+        "type": "ball",
+        "variation": "normal"
+      }
+      ],
+      "exerciseDuration": 90,
+      "calibration": {
+        "type": "person",
+        "animation": "squats"
+      }
+    }
+}
